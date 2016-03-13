@@ -4,7 +4,6 @@
 /checkouts
 pom.xml
 *.jar
-*.log
 *.class
 /.lein-*
 profiles.clj
