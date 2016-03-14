@@ -31,7 +31,13 @@
                               :max-length 50
                               :location {:lat 45 :lon 34}
                               :schedule {:days-available [3 4 5 6 8 9 10]
-                                         :days-booked []}}]
+                                         :days-booked []}}
+                             {:id 5
+                              :owner-id 4
+                              :max-length 15
+                              :location {:lat 45 :lon 34}
+                              :schedule {:days-available [8 9 10 12 13 14]
+                                         :days-booked [8 9 10]}}]
                      })
 
 (defn spot-detail [spot]
@@ -45,9 +51,14 @@
        [:div (str "Max Length " (:max-length spot))]
        [:div (str "Location: " (str (:location spot)))]]]])
 
+(defn spot-row [left right]
+  [h-box
+   :children [
+     (spot-detail left)
+     (if right (spot-detail right) nil)]])
 
 (defn harbor-detail [];[harbor]
   [:div.container
    [:h1 (:name example-harbors)]
    [:h3 "Spots Available"]
-   [:div (for [s (:spots example-harbors)] (spot-detail s))]])
+   [:div (for [s (partition-all 2 (:spots example-harbors))] (spot-row (first s) (second s)))]])
