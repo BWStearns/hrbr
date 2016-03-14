@@ -6,6 +6,7 @@
             [goog.history.EventType :as HistoryEventType]
             [markdown.core :refer [md->html]]
             [hrbr.ajax :refer [load-interceptors!]]
+            [hrbr.comps :refer [harbor-detail]]
             [ajax.core :refer [GET POST]])
   (:import goog.History))
 
@@ -27,7 +28,8 @@
         [:a.navbar-brand {:href "#/"} "hrbr"]
         [:ul.nav.navbar-nav
          [nav-link "#/" "Home" :home collapsed?]
-         [nav-link "#/about" "About" :about collapsed?]]]])))
+         [nav-link "#/about" "About" :about collapsed?]
+         [nav-link "#/harbors" "Harbors" :harbors collapsed?]]]])))
 
 (defn about-page []
   [:div.container
@@ -50,9 +52,27 @@
        [:div {:dangerouslySetInnerHTML
               {:__html (md->html docs)}}]]])])
 
+;; -------------------------
+;; App Pages
+
+(defn harbors-page []
+  [:div.container
+   [:div.row
+    [:div.col-md-12
+     "This is where harbors will be!"]]])
+
+(defn harbor-page []
+  [:div.container
+   [:div.row
+    [:div.col-md-12
+     "This is where a harbor will be!"]
+    (harbor-detail)]])
+
 (def pages
   {:home #'home-page
-   :about #'about-page})
+   :about #'about-page
+   :harbors #'harbors-page
+   :harbor #'harbor-page})
 
 (defn page []
   [(pages (session/get :page))])
@@ -66,6 +86,12 @@
 
 (secretary/defroute "/about" []
   (session/put! :page :about))
+
+(secretary/defroute "/harbors" []
+  (session/put! :page :harbors))
+
+(secretary/defroute "/harbor/1" []
+  (session/put! :page :harbor))
 
 ;; -------------------------
 ;; History
