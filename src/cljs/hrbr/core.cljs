@@ -6,7 +6,7 @@
             [goog.history.EventType :as HistoryEventType]
             [markdown.core :refer [md->html]]
             [hrbr.ajax :refer [load-interceptors!]]
-            [hrbr.comps :refer [harbor-detail home-render home]]
+            [hrbr.comps :refer [harbor-detail map-div-render]]
             [ajax.core :refer [GET POST]])
   (:import goog.History))
 
@@ -64,9 +64,8 @@
 (defn harbor-page []
   [:div.container
    [:div.row
-    [:div (home-render)]
-    [:div.col-md-12
-     "This is where a harbor will be!"]
+    [:div (map-div-render)]
+    [:div.col-md-12 "This is where a harbor will be!"]
     (harbor-detail)]])
 
 (def pages

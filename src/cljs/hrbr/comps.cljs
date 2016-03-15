@@ -4,6 +4,7 @@
             [reagent.core   :as    reagent]
             [re-com.core   :refer [h-box v-box box gap hyperlink-href p]]
             [re-com.box    :refer [box-args-desc]]))
+;;             [cljsjs.google-maps]))
 
 
 (def example-harbors {:name "Oak Bluffs"
@@ -42,25 +43,16 @@
                      })
 
 
-
-
-(defn home-render []
+(defn map-div-render []
   [:div#map {:style {:height "360px"}}])
 
+(defn map-did-mount []
+;;   [:div "FOO"])
+    (js/google-maps.Map "#map" {}))
 
-(defn home-did-mount []
-  (let [map (.setView (.map js/L "map") #js [51.505 -0.09] 13)]
-    (println "We got to the did-mount!")
-    (.addTo (.tileLayer js/L "http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-terrain-v2/{z}/{x}/{y}.png"
-                        (clj->js {:attribution "Map data &copy; [...]"
-                                  :maxZoom 18}))
-            map)))
-
-(defn home []
-  (reagent/create-class {:reagent-render home-render
-                         :component-did-mount home-did-mount})
-  (home-did-mount))
-
+(defn harbor-map []
+  (reagent/create-class {:reagent-render map-div-render
+                         :component-did-mount map-did-mount}))
 
 
 (defn spot-detail [spot]

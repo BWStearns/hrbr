@@ -37,7 +37,8 @@
                  [metosin/compojure-api "1.0.1"]
                  [luminus-log4j "0.1.3"]
                  [korma "0.4.2"]
-                 [re-com "0.8.0"]]
+                 [re-com "0.8.0"]
+                 [cljsjs/google-maps "3.18-1"]]
 
   :min-lein-version "2.0.0"
 
