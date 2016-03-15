@@ -37,8 +37,31 @@
                               :max-length 15
                               :location {:lat 45 :lon 34}
                               :schedule {:days-available [8 9 10 12 13 14]
-                                         :days-booked [8 9 10]}}]
+                                         :days-booked [8 9 10]}}
+                             ]
                      })
+
+
+
+
+(defn home-render []
+  [:div#map {:style {:height "360px"}}])
+
+
+(defn home-did-mount []
+  (let [map (.setView (.map js/L "map") #js [51.505 -0.09] 13)]
+    (println "We got to the did-mount!")
+    (.addTo (.tileLayer js/L "http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-terrain-v2/{z}/{x}/{y}.png"
+                        (clj->js {:attribution "Map data &copy; [...]"
+                                  :maxZoom 18}))
+            map)))
+
+(defn home []
+  (reagent/create-class {:reagent-render home-render
+                         :component-did-mount home-did-mount})
+  (home-did-mount))
+
+
 
 (defn spot-detail [spot]
   [border
@@ -62,3 +85,9 @@
    [:h1 (:name example-harbors)]
    [:h3 "Spots Available"]
    [:div (for [s (partition-all 2 (:spots example-harbors))] (spot-row (first s) (second s)))]])
+
+
+
+
+
+

@@ -8,6 +8,8 @@
   <body>
     <div id="navbar"></div>
     <div id="app">
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.7/leaflet.css" />
+      <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
       <div class="container">
         <div class="three-quarters-loader">Loading…</div>
         <p>If you're seeing this message, that means you haven't yet compiled your ClojureScript!</p>
@@ -29,6 +31,7 @@
         var csrfToken = "{{csrf-token}}";
     </script>
     {% script "/js/app.js" %}
+    <script>leaflet.core.main();</script>
   </body>
 </html>
 
