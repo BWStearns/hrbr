@@ -6,7 +6,7 @@
             [goog.history.EventType :as HistoryEventType]
             [markdown.core :refer [md->html]]
             [hrbr.ajax :refer [load-interceptors!]]
-            [hrbr.comps :refer [harbor-detail map-div-render]]
+            [hrbr.comps :refer [harbor-detail map-div-render map-did-mount]]
             [ajax.core :refer [GET POST]])
   (:import goog.History))
 
@@ -64,7 +64,7 @@
 (defn harbor-page []
   [:div.container
    [:div.row
-    [:div (map-div-render)]
+    [:div (map-did-mount)]
     [:div.col-md-12 "This is where a harbor will be!"]
     (harbor-detail)]])
 

@@ -3,8 +3,8 @@
             [re-com.misc    :refer [throbber-args-desc]]
             [reagent.core   :as    reagent]
             [re-com.core   :refer [h-box v-box box gap hyperlink-href p]]
-            [re-com.box    :refer [box-args-desc]]))
-;;             [cljsjs.google-maps]))
+            [re-com.box    :refer [box-args-desc]]
+            [cljsjs.google-maps]))
 
 
 (def example-harbors {:name "Oak Bluffs"
@@ -47,8 +47,10 @@
   [:div#map {:style {:height "360px"}}])
 
 (defn map-did-mount []
-;;   [:div "FOO"])
-    (js/google-maps.Map "#map" {}))
+    (js/google-maps.Map "#map" {
+                                 :center {:lat -34.397, :lng 150.644}
+                                 :scrollwheel false
+                                 :zoom 8}))
 
 (defn harbor-map []
   (reagent/create-class {:reagent-render map-div-render
