@@ -43,18 +43,16 @@
 
 
 (defn map-div-render []
-  [:div#map {:style {:height "360px"}}])
+  [:div {:style {:height "360px"}}])
 
-(defn map-did-mount []
-  (google.maps.Map "#map" {
-                               :center {:lat -34.397, :lng 150.644}
-                               :scrollwheel false
-                               :zoom 8}))
-;;   [:div "FOO"])
+(defn map-did-mount [this]
+  (let [map-canvas (reagent/dom-node this)
+        map-options (clj->js {"center" (google.maps.LatLng -34.397, 150.644) "zoom" 8})]
+          (google.maps.Map map-canvas map-options)))
 
-;; (defn harbor-map []
-;;   (reagent/create-class {:reagent-render map-div-render
-;;                          :component-did-mount map-did-mount}))
+(defn harbor-map []
+  (reagent/create-class {:reagent-render map-div-render
+                         :component-did-mount map-did-mount}))
 
 (defn spot-detail [spot]
   [border
